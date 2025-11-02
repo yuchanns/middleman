@@ -35,8 +35,9 @@ env/
 *.swo
 *~
 
-# UV
-uv.lock
+# Cache
+.pytest_cache/
+.ruff_cache/
 
 # OS
 .DS_Store
