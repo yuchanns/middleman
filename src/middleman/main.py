@@ -1,6 +1,5 @@
 import httpx
 from fastapi import FastAPI, Request, Response
-from fastapi.responses import StreamingResponse
 
 app = FastAPI()
 
@@ -16,16 +15,16 @@ async def proxy_dler(path: str, request: Request):
     """
     # Construct the target URL
     target_url = f"https://dler.pro/{path}"
-    
+
     # Preserve query parameters
     if request.url.query:
         target_url = f"{target_url}?{request.url.query}"
-    
+
     # Forward the request using httpx
     async with httpx.AsyncClient() as client:
         # Get the request body
         body = await request.body()
-        
+
         # Forward the request with the same method, headers, and body
         response = await client.request(
             method=request.method,
@@ -38,7 +37,7 @@ async def proxy_dler(path: str, request: Request):
             content=body,
             follow_redirects=True,
         )
-        
+
         # Return the response with the same status code, headers, and content
         return Response(
             content=response.content,
@@ -51,7 +50,12 @@ async def proxy_dler(path: str, request: Request):
         )
 
 
-if __name__ == "__main__":
+def main():
+    """Run the FastAPI server using uvicorn."""
     import uvicorn
-    
+
     uvicorn.run(app, host="0.0.0.0", port=8000)
+
+
+if __name__ == "__main__":
+    main()

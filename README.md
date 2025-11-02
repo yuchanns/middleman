@@ -19,6 +19,9 @@ A FastAPI-based HTTP proxy for forwarding requests to third-party services.
 ```bash
 # Install dependencies
 uv sync
+
+# Install the package in editable mode (for development)
+uv pip install -e .
 ```
 
 ## Usage
@@ -26,12 +29,15 @@ uv sync
 ### Running the server
 
 ```bash
-# Using UV
-uv run python main.py
+# Using the CLI command
+uv run middleman
+
+# Or directly with Python
+uv run python -m middleman.main
 
 # Or activate the virtual environment
 source .venv/bin/activate
-python main.py
+middleman
 ```
 
 The server will start on `http://0.0.0.0:8000`.
@@ -51,7 +57,24 @@ https://dler.pro/api/v3/download.getFile/xxxx?clash=smart
 ## Testing
 
 ```bash
-uv run pytest tests/
+# Run all tests
+uv run pytest
+
+# Run tests with verbose output
+uv run pytest -v tests/
+```
+
+## Linting and Formatting
+
+```bash
+# Check code with ruff
+uv run ruff check .
+
+# Format code with ruff
+uv run ruff format .
+
+# Fix issues automatically
+uv run ruff check --fix .
 ```
 
 ## Routes
@@ -67,3 +90,21 @@ This project uses:
 - **Framework**: FastAPI
 - **HTTP Client**: httpx
 - **ASGI Server**: uvicorn
+- **Testing**: pytest, pytest-asyncio
+- **Linting**: ruff
+
+## Project Structure
+
+```
+middleman/
+├── src/
+│   └── middleman/
+│       ├── __init__.py
+│       └── main.py
+├── tests/
+│   └── test_proxy.py
+├── pyproject.toml
+├── .gitignore
+└── README.md
+```
+

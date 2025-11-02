@@ -1,7 +1,7 @@
 [project]
 name = "middleman"
 version = "0.1.0"
-description = "Add your description here"
+description = "A FastAPI-based HTTP proxy for forwarding requests to third-party services"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
@@ -10,8 +10,16 @@ dependencies = [
     "uvicorn>=0.38.0",
 ]
 
+[project.scripts]
+middleman = "middleman.main:main"
+
 [dependency-groups]
 dev = [
     "pytest>=8.4.2",
     "pytest-asyncio>=1.2.0",
+    "ruff>=0.14.3",
 ]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
