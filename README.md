@@ -54,6 +54,27 @@ The proxy will forward the request to:
 https://dler.pro/api/v3/download.getFile/xxxx?clash=smart
 ```
 
+## Docker
+
+### Building the Docker image
+
+```bash
+docker build -t middleman .
+```
+
+### Running with Docker
+
+```bash
+docker run -p 8000:8000 middleman
+```
+
+### Using pre-built images from GitHub Container Registry
+
+```bash
+docker pull ghcr.io/yuchanns/middleman:latest
+docker run -p 8000:8000 ghcr.io/yuchanns/middleman:latest
+```
+
 ## Testing
 
 ```bash
